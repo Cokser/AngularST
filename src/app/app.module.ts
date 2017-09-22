@@ -7,10 +7,13 @@ import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable 
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
+import { FirebaseService } from "./services/firebase.service";
+import { ValidatorMessagesComponent } from './validator-messages/validator-messages.component'
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ValidatorMessagesComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +23,7 @@ import { AppComponent } from './app.component';
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
-  providers: [],
+  providers: [FirebaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

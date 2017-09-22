@@ -1,31 +1,31 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div class="container app-container d-flex flex-column justify-content-center">
   <div class="row-centered">
-    <div class="col-md-12">
-      <div class="form-container">
-        <form [formGroup]="requestForm" (submit)="submitForm($event);" class="d-flex justify-content-between align-items-center">
-          <label class="search-title">i'm looking for</label>
+    <div class="form-container">
+      <form [formGroup]="requestForm" (submit)="submitForm($event);" class="d-flex justify-content-between align-items-center">
+        <label class="search-title">i'm looking for</label>
+        <div class="input-container d-flex flex-column">
           <input class="search-input" type="text" formControlName="request" placeholder="Text of my search request">
-          <button class="btn st-btn" type="submit"><img class="image-btn" src="assets/images/search.png">Find</button>
-        </form>
-      </div>
-      <div class="search-history">
-        <h1 class="history-title"> Search history {{ index }}</h1>
-      </div>
-      <div class="requests-container">
-        <div *ngFor="let request of requestsArray" class="request-container d-flex flex-row align-items-center justify-content-between">
-          <article class="right-data d-flex flex-column justify-content-around">
-            <div class="request-date d-flex flex-row">
-              <p class="date-data">{{ request.date | date: 'dd/MM/yyyy'}}</p>
-              <p class="time-data">{{ request.date | date: 'HH:mm'}}</p>
-            </div>
-            <div class="request-title">
-              <p class="request-data">{{ request.request }}</p>
-            </div>
-          </article>
-          <div class="delete-button">
-            <button class="btn st-btn" type="button" (click)="deleteRequest(request)"><img class="image-btn" src="assets/images/delete.png">Delete</button>
+          <validator-messages [field]="requestForm.controls['request']"></validator-messages>
+        </div>
+        <button class="btn st-btn" type="submit"><img class="image-btn" src="assets/images/search.png">Find</button>
+      </form>
+    </div>
+    <div class="search-history">
+      <h1 class="history-title"> Search history {{ index }}</h1>
+    </div>
+    <div class="requests-container">
+      <div *ngFor="let request of requestsArray" class="request-container d-flex flex-row align-items-center justify-content-between">
+        <article class="right-data d-flex flex-column justify-content-around">
+          <div class="request-date d-flex flex-row">
+            <p class="date-data">{{ request.date | date: 'dd/MM/yyyy'}}</p>
+            <p class="time-data">{{ request.date | date: 'HH:mm'}}</p>
           </div>
+          <div class="request-title">
+            <p class="request-data">{{ request.request }}</p>
+          </div>
+        </article>
+        <div class="delete-button">
+          <button class="btn st-btn" type="button" (click)="deleteRequest(request)"><img class="image-btn" src="assets/images/delete.png">Delete</button>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+
+import { FirebaseService } from "./services/firebase.service";
 
 @Component({
   selector: 'app-root',
@@ -14,23 +15,21 @@ export class AppComponent {
   title = 'SoftTeco';
 
   index: number = 0;
-
-  requests: FirebaseListObservable<any[]>;
   requestsArray: any[];
 
-  constructor(private db: AngularFireDatabase) {
+  constructor(private firebaseService: FirebaseService) { }
 
-    this.requests = db.list('/data');
+  ngOnInit(){
 
-    this.requests.subscribe((array: any[]) => {       //    Сортировка по дате
+    this.firebaseService.getRequests().subscribe((array: any[]) => {
 
       this.requestsArray = array;
       this.index = array.length;
 
-      this.requestsArray.sort(function (a, b) {
+      this.requestsArray.sort(function (a, b) {       //    Сортировка по дате
 
         let key1 = new Date(a.date),
-            key2 = new Date(b.date);
+          key2 = new Date(b.date);
 
         if (key1 > key2) {
 
@@ -46,6 +45,15 @@ export class AppComponent {
 
         }
       });
+    });
+
+    this.requestForm.statusChanges.subscribe((status) => {
+
+      if ( status === 'INVALID' && !!this.requestData ) {
+
+        this.requestData = null;
+
+      }
     });
   }
 
@@ -83,7 +91,7 @@ export class AppComponent {
 
     };
 
-    this.requests.push( this.requestData );    //   Отправляю данные на сервер
+    this.firebaseService.requests.push( this.requestData );    //   Отправляю данные на сервер
 
     this.requestForm.reset();                  //   Перезагружаю форму
 
@@ -92,7 +100,7 @@ export class AppComponent {
 
   public deleteRequest( request ) {            //   Удаление запроса из истории
 
-    this.requests.remove( request );
+    this.firebaseService.requests.remove( request );
 
   }
 
@@ -108,17 +116,5 @@ export class AppComponent {
 
       }
     }
-  }
-
-  ngOnInit(){
-
-    this.requestForm.statusChanges.subscribe((status) => {
-
-      if ( status === 'INVALID' && !!this.requestData ) {
-
-        this.requestData = null;
-
-      }
-    });
   }
 }

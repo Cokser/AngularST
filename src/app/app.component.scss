@@ -9,6 +9,10 @@ p {
 }
 .search-title {
   margin: 0;
+  @media (max-width: 768px) {
+    display: none;
+    padding: 0;
+  }
 }
 .search-input {
   height: 30px;
@@ -16,11 +20,21 @@ p {
   font-size: 15px;
   padding-left: 3px;
   border: solid 4px;
+  @media (max-width: 768px) {
+    width: 280px;
+    word-wrap: break-word;
+    height: 50px;
+  }
 }
 .app-container {
   border: solid 5px;
   width: 700px;
   padding: 20px;
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 0;
+    border: none;
+  }
 }
 .st-btn {
   -webkit-box-shadow: 4px 4px 0 0 rgba(0,0,0,1);
@@ -29,13 +43,18 @@ p {
   background-color: #fff;
   border: solid 4px #000;
   border-radius: 0;
+  @media (max-width: 768px) {
+  margin: 0;
+}
 }
 .requests-container {
   margin-left: 20px;
+  @media (max-width: 768px) {
+    margin-left: 0;
+  }
 }
 .request-container {
   border-bottom: solid 4px;
-  height: 80px;
 }
 .right-data {
   height: 100%;
@@ -47,10 +66,27 @@ p {
   padding: 0;
   padding-right: 10px;
   padding-left: 10px;
+  @media (max-width: 768px) {
+    border: solid 2px;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
 }
 .image-btn {
   padding-right: 6px;
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 .time-data {
   margin-left: 10px;
+}
+.request-data {
+  font-size: 20px;
+  width: 400px;
+  word-wrap: break-word;
+  @media (max-width: 768px) {
+    width: 280px;
+    word-wrap: break-word;
+  }
 }
