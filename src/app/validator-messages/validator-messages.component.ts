@@ -16,7 +16,7 @@ export class ValidatorMessagesComponent {
 
     if ( !field || !field.errors ) {
 
-      return false;
+      return null;
 
     }
 
