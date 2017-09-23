@@ -8,6 +8,7 @@ import { FirebaseService } from "./services/firebase.service";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent {
 
   public requestData: any = null;
@@ -15,6 +16,7 @@ export class AppComponent {
   title = 'SoftTeco';
 
   index: number = 0;
+
   requestsArray: any[];
 
   constructor(private firebaseService: FirebaseService) { }
@@ -22,7 +24,6 @@ export class AppComponent {
   ngOnInit(){
 
     this.firebaseService.getRequests().subscribe((array: any[]) => {
-
       this.requestsArray = array;
       this.index = array.length;
 
@@ -93,12 +94,15 @@ export class AppComponent {
 
     this.firebaseService.requests.push( this.requestData );    //   Отправляю данные на сервер
 
-    this.requestForm.reset();                  //   Перезагружаю форму
+    this.firebaseService.playSound('assets/sounds/coins.mp3');
 
+    this.requestForm.reset();                  //   Перезагружаю форму
 
   }
 
   public deleteRequest( request ) {            //   Удаление запроса из истории
+
+    this.firebaseService.playSound('assets/sounds/delete.mp3');
 
     this.firebaseService.requests.remove( request );
 

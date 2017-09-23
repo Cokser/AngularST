@@ -4,12 +4,19 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 @Injectable()
 export class FirebaseService {
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase) {
+
+
+  }
 
   requests: FirebaseListObservable<any[]>;
 
   getRequests() {
     this.requests = this.db.list('/data');
     return this.requests;
+  }
+  playSound(sound) {
+    let notificationSound = new Audio(sound);
+    notificationSound.play();
   }
 }
